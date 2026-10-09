@@ -1,45 +1,46 @@
 <!--
-  @file 联系板块 —— 居中 CTA：邮箱 + GitHub 入口
+  @file 联系 —— 一行超大字邮箱作为主体，左对齐编辑式排版
 -->
 <script setup>
 /**
- * 联系板块：邮箱与 GitHub 链接来自 profile
+ * 联系组件：邮箱与 GitHub 入口，数据来自 profile.js
  */
 import { profile } from '../data/profile'
 </script>
 
 <template>
   <section id="contact" class="section">
-    <div v-reveal class="container contact">
-      <p class="section-label">// CONTACT</p>
-      <h2 class="section-title">让我们一起创造点什么</h2>
-      <p class="sub">无论是项目合作、技术交流还是机会引荐，都欢迎随时联系我。</p>
+    <div class="container">
+      <div class="section-head">
+        <h2 class="section-title">联系</h2>
+        <p class="section-meta">项目合作 / 技术交流</p>
+      </div>
 
-      <div class="actions">
-        <a :href="`mailto:${profile.email}`" class="btn btn-primary">{{ profile.email }}</a>
-        <a :href="profile.github" target="_blank" rel="noopener" class="btn btn-ghost">
-          GitHub ↗
-        </a>
+      <div class="contact-body">
+        <a class="contact-mail link-u" :href="`mailto:${profile.email}`">{{ profile.email }}</a>
+        <p class="contact-sub">
+          也可以在
+          <a class="link-u" :href="profile.github" target="_blank" rel="noopener">GitHub</a>
+          上找到我。
+        </p>
       </div>
     </div>
   </section>
 </template>
 
 <style scoped>
-.contact {
-  text-align: center;
+/* 超大字邮箱：display 字体，下划线交互，行高防中文系统字体裁切 */
+.contact-mail {
+  font-family: var(--font-display);
+  font-size: clamp(1.5rem, 4.6vw, 3rem);
+  font-weight: 700;
+  line-height: 1.4;
+  word-break: break-all;
 }
 
-.sub {
-  color: var(--text-dim);
-  margin-top: 14px;
-}
-
-.actions {
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: center;
-  gap: 14px;
-  margin-top: 32px;
+.contact-sub {
+  margin-top: 22px;
+  color: var(--muted);
+  font-size: 0.95rem;
 }
 </style>

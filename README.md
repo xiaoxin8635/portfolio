@@ -11,7 +11,8 @@
 | 框架 | Vue 3（Composition API + `<script setup>`） |
 | 构建 | Vite 8 |
 | 部署 | Cloudflare 静态托管（Git 集成自动部署，`*.workers.dev` / `*.pages.dev` 子域） |
-| 动画 | IntersectionObserver 自定义指令 `v-reveal`（零依赖） |
+| 字体 | Space Grotesk + JetBrains Mono（woff2 本地自托管，不依赖 Google Fonts） |
+| 动效 | Hero 一次性 CSS 入场编排（适配 `prefers-reduced-motion`，无滚动渐显） |
 
 ## 本地开发
 
@@ -25,22 +26,22 @@ npm run preview # 本地预览生产构建产物
 ## 目录结构
 
 ```
-├── index.html                    # HTML 入口（SEO / OG 元信息在此修改）
+├── index.html                    # HTML 入口（SEO / OG 元信息、theme-color、字体预加载）
 ├── public/
-│   └── favicon.svg               # 站点图标
+│   ├── favicon.svg               # 站点图标
+│   └── fonts/                    # 自托管字体（Space Grotesk / JetBrains Mono）
 ├── src/
-│   ├── main.js                   # 应用入口（注册 v-reveal 指令）
+│   ├── main.js                   # 应用入口
 │   ├── App.vue                   # 根组件（板块编排）
-│   ├── assets/main.css           # 设计变量与全局样式
+│   ├── assets/main.css           # 设计 token 与全局样式（琥珀金深色主题）
 │   ├── data/profile.js           # ★ 网站内容配置（唯一数据源）
-│   ├── directives/reveal.js      # v-reveal 滚动渐显指令
 │   └── components/
-│       ├── NavBar.vue            # 固定导航（毛玻璃 + 移动端菜单）
-│       ├── HeroSection.vue       # 首屏
-│       ├── ProjectsSection.vue   # 项目展示
-│       ├── SkillsSection.vue     # 技术栈
+│       ├── NavBar.vue            # 固定导航（滚动收纳细条 + 移动端菜单）
+│       ├── HeroSection.vue       # 首屏（左文右 profile.js 代码窗口）
+│       ├── ProjectsSection.vue   # 项目展示（行式列表）
+│       ├── SkillsSection.vue     # 技术栈（分组清单）
 │       ├── AboutSection.vue      # 关于我 + 时间线
-│       ├── ContactSection.vue    # 联系方式
+│       ├── ContactSection.vue    # 联系方式（大字邮箱）
 │       └── FooterBar.vue         # 页脚
 └── vite.config.js                # Vite 配置
 ```
@@ -50,7 +51,7 @@ npm run preview # 本地预览生产构建产物
 **只需编辑 `src/data/profile.js`** —— 姓名、职位、项目、技能、经历、联系方式全部集中在该文件，改完 push 即自动上线：
 
 1. 替换标注 `TODO` 的字段（邮箱、示例项目、经历）
-2. `projects` 数组增删项目卡片，每项支持 `github` / `demo` 链接（留空则不显示对应入口）
+2. `projects` 数组增删项目条目，每项支持 `github` / `demo` 链接（留空则不显示对应入口）
 3. 提交并推送：
 
 ```bash

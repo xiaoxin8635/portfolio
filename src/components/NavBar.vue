@@ -1,16 +1,16 @@
 <!--
-  @file 顶部固定导航 —— 滚动后加毛玻璃背景，移动端汉堡菜单
+  @file 顶部固定导航 —— 顶部透明，滚动后收纳为实色细条，移动端汉堡菜单
 -->
 <script setup>
 /**
  * 导航栏组件
- * - 监听页面滚动，超过 24px 时切换 .scrolled 状态（加背景模糊与底边框）
+ * - 监听页面滚动，超过 24px 时切换 .scrolled 状态（背景变实色、高度收纳为细条）
  * - 移动端通过汉堡按钮开合菜单
  */
 import { onMounted, onUnmounted, ref } from 'vue'
 import { profile } from '../data/profile'
 
-/** 是否已滚动（控制导航背景样式） */
+/** 是否已滚动（控制导航收纳状态） */
 const scrolled = ref(false)
 /** 移动端菜单开合状态 */
 const menuOpen = ref(false)
@@ -49,7 +49,7 @@ function closeMenu() {
         <a v-for="link in links" :key="link.href" :href="link.href" @click="closeMenu">
           {{ link.label }}
         </a>
-        <a :href="profile.github" target="_blank" rel="noopener" class="github-link">GitHub ↗</a>
+        <a :href="profile.github" target="_blank" rel="noopener" class="github-link">GitHub</a>
       </nav>
 
       <button
@@ -71,48 +71,53 @@ function closeMenu() {
   left: 0;
   right: 0;
   z-index: 100;
-  transition:
-    background 0.3s ease,
-    border-color 0.3s ease;
+  transition: background 0.25s ease, border-color 0.25s ease;
   border-bottom: 1px solid transparent;
 }
 
+/* 滚动后：实色背景（无毛玻璃），底边细线 */
 .nav.scrolled {
-  background: rgba(7, 11, 20, 0.75);
-  backdrop-filter: blur(12px);
-  -webkit-backdrop-filter: blur(12px);
+  background: var(--bg);
   border-bottom-color: var(--border);
 }
 
+/* 高度收纳：68px → 52px，过渡平滑 */
 .nav-inner {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  height: 64px;
+  height: 68px;
+  transition: height 0.25s ease;
+}
+
+.nav.scrolled .nav-inner {
+  height: 52px;
 }
 
 .logo {
   display: flex;
   align-items: center;
   gap: 10px;
+  font-family: var(--font-display);
   font-weight: 700;
 }
 
 .logo-mark {
   font-family: var(--font-mono);
+  font-weight: 400;
   color: var(--accent);
 }
 
 .logo-name {
-  font-size: 1.05rem;
+  font-size: 1.02rem;
 }
 
 .links {
   display: flex;
   align-items: center;
-  gap: 28px;
-  font-size: 0.95rem;
-  color: var(--text-dim);
+  gap: 30px;
+  font-size: 0.92rem;
+  color: var(--muted);
 }
 
 .links a {
@@ -125,7 +130,7 @@ function closeMenu() {
 
 .github-link {
   font-family: var(--font-mono);
-  font-size: 0.85rem;
+  font-size: 0.84rem;
 }
 
 /* 汉堡按钮：桌面端隐藏 */
@@ -150,20 +155,18 @@ function closeMenu() {
     display: flex;
   }
 
-  /* 移动端：菜单收起时隐藏，展开时全宽下拉 */
+  /* 移动端：菜单收起时隐藏，展开时实色全宽下拉 */
   .links {
     position: absolute;
-    top: 64px;
+    top: 52px;
     left: 0;
     right: 0;
     display: none;
     flex-direction: column;
     align-items: flex-start;
-    padding: 8px 24px 20px;
+    padding: 10px 28px 22px;
     gap: 16px;
-    background: rgba(7, 11, 20, 0.95);
-    backdrop-filter: blur(12px);
-    -webkit-backdrop-filter: blur(12px);
+    background: var(--bg);
     border-bottom: 1px solid var(--border);
   }
 

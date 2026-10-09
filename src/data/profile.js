@@ -13,18 +13,16 @@ export const profile = {
   name: '陈琦勇',
   /** 英文名（可选，暂未在页面使用，留作扩展） */
   nameEn: 'Chen Qiyong',
-  /** 职位定位（首屏第二行） */
+  /** 职位定位（首屏首行引导） */
   role: '全栈开发者 / Full-Stack Developer',
-  /** 一句话介绍（首屏第三行） */
-  tagline: '热爱把想法变成可运行的产品，关注工程质量与交付体验。',
+  /** 一句话主张（首屏正文段落） */
+  tagline: '把想法做成能运行的产品。这个网站的界面由右侧这份配置驱动 —— 改完推送，一两分钟内自动上线。',
   /** 所在地 */
   location: 'China',
   /** 联系邮箱 —— TODO: 替换为你的真实邮箱 */
   email: 'hello@example.com',
   /** GitHub 主页（导航 / 首屏 / 联系板块的跳转链接） */
   github: 'https://github.com/xiaoxin8635',
-  /** 首屏技能标签（chip 列表，建议 4~6 个最能代表你的技术） */
-  heroTags: ['Vue 3', 'TypeScript', 'Node.js', 'Cloudflare', 'Git'],
 }
 
 /**
@@ -39,13 +37,11 @@ export const aboutText = [
 
 /**
  * 项目列表（Projects 板块）
- * @type {Array<{index: string, title: string, description: string, tech: string[], github?: string, demo?: string}>}
+ * @type {Array<{title: string, description: string, tech: string[], github?: string, demo?: string}>}
  * TODO: 将示例项目替换为你自己的真实项目
  */
 export const projects = [
   {
-    /** 卡片编号（纯展示用，按顺序递增即可） */
-    index: '01',
     title: '个人作品集网站（本站）',
     description:
       '基于 Vue 3 + Vite 构建的响应式单页作品集，托管于 Cloudflare。git push 后 1~2 分钟内自动构建上线，全球 CDN 加速。',
@@ -56,7 +52,6 @@ export const projects = [
     demo: '',
   },
   {
-    index: '02',
     title: '【示例】后台管理系统',
     description:
       '替换成你的真实项目：一句话说清楚它解决了什么问题、你负责的部分，以及亮点数据（性能提升幅度 / 用户量等）。',
@@ -65,7 +60,6 @@ export const projects = [
     demo: '',
   },
   {
-    index: '03',
     title: '【示例】开源工具库',
     description:
       '替换成你的真实项目：没有截图也没关系，清晰的描述与准确的技术栈标签更能体现工程能力。',

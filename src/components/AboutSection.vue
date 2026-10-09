@@ -1,5 +1,5 @@
 <!--
-  @file 关于板块 —— 左侧个人介绍 + 右侧经历时间线
+  @file 关于板块 —— 左侧个人介绍（纯排版）+ 右侧经历时间线（内容真为序列，保留时间线形式）
 -->
 <script setup>
 /**
@@ -11,19 +11,20 @@ import { aboutText, timeline } from '../data/profile'
 <template>
   <section id="about" class="section">
     <div class="container">
-      <p v-reveal class="section-label">// ABOUT</p>
-      <h2 v-reveal="{ delay: 60 }" class="section-title">关于我</h2>
+      <div class="section-head">
+        <h2 class="section-title">关于我</h2>
+        <p class="section-meta">经历与偏好</p>
+      </div>
 
       <div class="about-grid">
         <!-- 左：介绍段落 -->
-        <div v-reveal class="intro card">
+        <div class="intro">
           <p v-for="(para, i) in aboutText" :key="i">{{ para }}</p>
         </div>
 
         <!-- 右：经历时间线 -->
         <ol class="timeline">
-          <li v-for="(item, i) in timeline" :key="i" v-reveal="{ delay: i * 100 }" class="tl-item">
-            <span class="tl-dot" aria-hidden="true" />
+          <li v-for="(item, i) in timeline" :key="i" class="tl-item">
             <p class="tl-period">{{ item.period }}</p>
             <h4 class="tl-title">{{ item.title }}</h4>
             <p class="tl-desc">{{ item.description }}</p>
@@ -37,82 +38,60 @@ import { aboutText, timeline } from '../data/profile'
 <style scoped>
 .about-grid {
   display: grid;
-  grid-template-columns: 1fr 1.2fr;
-  gap: 24px;
-  margin-top: 40px;
+  grid-template-columns: 1fr 1.1fr;
+  gap: 64px;
 }
 
+/* 介绍：纯文本排版，无卡片容器 */
 .intro {
-  padding: 28px;
   display: flex;
   flex-direction: column;
-  gap: 14px;
+  gap: 16px;
+  color: var(--muted);
+  font-size: 0.96rem;
 }
 
-.intro p {
-  color: var(--text-dim);
-  font-size: 0.95rem;
-}
-
-/* 时间线：左侧竖线 + 每项一个渐变圆点 */
+/* 时间线：项间细分割线替代竖线装饰 */
 .timeline {
   list-style: none;
-  position: relative;
-  padding-left: 26px;
   display: flex;
   flex-direction: column;
-  gap: 28px;
-}
-
-/* 竖线 */
-.timeline::before {
-  content: '';
-  position: absolute;
-  left: 4px;
-  top: 6px;
-  bottom: 6px;
-  width: 2px;
-  background: var(--border);
 }
 
 .tl-item {
-  position: relative;
+  padding: 20px 0;
+  border-bottom: 1px solid var(--border);
 }
 
-/* 圆点对齐竖线 */
-.tl-dot {
-  position: absolute;
-  left: -26px;
-  top: 8px;
-  width: 10px;
-  height: 10px;
-  border-radius: 50%;
-  background: var(--gradient);
-  box-shadow: 0 0 0 4px rgba(34, 211, 238, 0.12);
+.tl-item:first-child {
+  padding-top: 0;
 }
 
+/* 年份：mono + 钢蓝（次级信息用钢蓝的 token 分工） */
 .tl-period {
   font-family: var(--font-mono);
   font-size: 0.8rem;
-  color: var(--accent);
-  letter-spacing: 0.08em;
+  color: var(--steel);
 }
 
 .tl-title {
-  font-size: 1rem;
-  margin-top: 4px;
+  font-family: var(--font-display);
+  font-size: 1.02rem;
+  font-weight: 700;
+  margin-top: 6px;
 }
 
 .tl-desc {
-  color: var(--text-dim);
+  color: var(--muted);
   font-size: 0.9rem;
-  margin-top: 4px;
+  margin-top: 6px;
 }
 
 /* 窄屏切换为单列 */
 @media (max-width: 780px) {
   .about-grid {
     grid-template-columns: 1fr;
+    gap: 40px;
   }
 }
 </style>

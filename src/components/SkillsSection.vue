@@ -1,9 +1,9 @@
 <!--
-  @file 技能板块 —— 分组卡片展示技术栈，数据来自 profile.js 的 skillGroups
+  @file 技术栈 —— 紧凑分组清单：组名 + 流式 mono 条目，无卡片
 -->
 <script setup>
 /**
- * 技能板块：每组一张卡片，组内以 chip 列出具体技术
+ * 技能清单组件：数据来自 profile.js 的 skillGroups 数组
  */
 import { skillGroups } from '../data/profile'
 </script>
@@ -11,22 +11,16 @@ import { skillGroups } from '../data/profile'
 <template>
   <section id="skills" class="section">
     <div class="container">
-      <p v-reveal class="section-label">// SKILLS</p>
-      <h2 v-reveal="{ delay: 60 }" class="section-title">技术栈</h2>
+      <div class="section-head">
+        <h2 class="section-title">技术栈</h2>
+        <p class="section-meta">以日常使用为准</p>
+      </div>
 
-      <div class="grid">
-        <div
-          v-for="(g, i) in skillGroups"
-          :key="g.name"
-          v-reveal="{ delay: i * 80 }"
-          class="card group"
-        >
-          <h3 class="group-name">
-            <span class="dot" aria-hidden="true" />
-            {{ g.name }}
-          </h3>
-          <ul class="items">
-            <li v-for="item in g.items" :key="item" class="chip">{{ item }}</li>
+      <div class="skill-grid">
+        <div v-for="g in skillGroups" :key="g.name" class="skill-group">
+          <h3 class="skill-name">{{ g.name }}</h3>
+          <ul class="skill-items">
+            <li v-for="item in g.items" :key="item">{{ item }}</li>
           </ul>
         </div>
       </div>
@@ -35,38 +29,37 @@ import { skillGroups } from '../data/profile'
 </template>
 
 <style scoped>
-.grid {
+/* 双栏分组排布；第三组自然落位 */
+.skill-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
-  gap: 20px;
-  margin-top: 40px;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 48px 64px;
 }
 
-.group {
-  padding: 26px;
-}
-
-.group-name {
-  display: flex;
-  align-items: center;
-  gap: 10px;
+.skill-name {
+  font-family: var(--font-display);
   font-size: 1.05rem;
+  font-weight: 700;
+  padding-bottom: 14px;
   margin-bottom: 18px;
+  border-bottom: 1px solid var(--border);
 }
 
-/* 组名前的渐变小圆点 */
-.dot {
-  width: 9px;
-  height: 9px;
-  border-radius: 50%;
-  background: var(--gradient);
-  flex-shrink: 0;
-}
-
-.items {
+/* 条目：mono 流式行内排布，仅以间距分组，无胶囊无边框 */
+.skill-items {
   list-style: none;
   display: flex;
   flex-wrap: wrap;
-  gap: 10px;
+  gap: 8px 22px;
+  font-family: var(--font-mono);
+  font-size: 0.85rem;
+  color: var(--muted);
+}
+
+@media (max-width: 640px) {
+  .skill-grid {
+    grid-template-columns: 1fr;
+    gap: 36px;
+  }
 }
 </style>
