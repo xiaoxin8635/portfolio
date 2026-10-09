@@ -1,0 +1,230 @@
+/**
+ * @file 全局样式与设计变量（Design Tokens）
+ * 深色主题 · 青→紫渐变主色 · 所有组件通过 var(--xxx) 引用此处变量
+ */
+
+:root {
+  /* 背景层级 */
+  --bg: #070b14;
+  --bg-soft: #0b1120;
+  /* 卡片与描边 */
+  --card: rgba(148, 163, 184, 0.06);
+  --card-hover: rgba(148, 163, 184, 0.12);
+  --border: rgba(148, 163, 184, 0.16);
+  /* 文字层级 */
+  --text: #e2e8f0;
+  --text-dim: #94a3b8;
+  --text-faint: #64748b;
+  /* 主色：青 → 紫渐变 */
+  --accent: #22d3ee;
+  --accent-2: #a78bfa;
+  --gradient: linear-gradient(120deg, var(--accent), var(--accent-2));
+  /* 字体：优先系统字体，避免外链字体拖慢国内访问 */
+  --font-sans: 'Inter', 'PingFang SC', 'Microsoft YaHei', system-ui, sans-serif;
+  --font-mono: 'JetBrains Mono', 'Fira Code', Consolas, monospace;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+/* 锚点跳转平滑滚动，并预留固定导航栏的高度 */
+html {
+  scroll-behavior: smooth;
+  scroll-padding-top: 84px;
+}
+
+body {
+  font-family: var(--font-sans);
+  background: var(--bg);
+  color: var(--text);
+  line-height: 1.7;
+  -webkit-font-smoothing: antialiased;
+  overflow-x: hidden;
+}
+
+/* 全局背景光晕：固定定位，不随内容滚动，视觉上更稳定 */
+body::before {
+  content: '';
+  position: fixed;
+  inset: 0;
+  z-index: -1;
+  background:
+    radial-gradient(600px circle at 15% 0%, rgba(34, 211, 238, 0.08), transparent 60%),
+    radial-gradient(700px circle at 85% 20%, rgba(167, 139, 250, 0.07), transparent 60%);
+  pointer-events: none;
+}
+
+::selection {
+  background: rgba(34, 211, 238, 0.3);
+}
+
+/* 深色滚动条 */
+::-webkit-scrollbar {
+  width: 10px;
+}
+::-webkit-scrollbar-track {
+  background: var(--bg);
+}
+::-webkit-scrollbar-thumb {
+  background: rgba(148, 163, 184, 0.25);
+  border-radius: 5px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: rgba(148, 163, 184, 0.4);
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+img {
+  max-width: 100%;
+  display: block;
+}
+
+button {
+  font-family: inherit;
+  cursor: pointer;
+}
+
+/* ---------- 布局工具类 ---------- */
+
+/* 内容容器：居中 + 左右留白 */
+.container {
+  max-width: 1080px;
+  margin: 0 auto;
+  padding: 0 24px;
+}
+
+/* 板块统一垂直间距 */
+.section {
+  padding: 96px 0;
+}
+
+/* 板块标题：mono 小标签（如 // PROJECTS）+ 大标题 */
+.section-label {
+  font-family: var(--font-mono);
+  font-size: 0.85rem;
+  color: var(--accent);
+  letter-spacing: 0.12em;
+  margin-bottom: 8px;
+}
+
+.section-title {
+  font-size: clamp(1.6rem, 3.5vw, 2.2rem);
+  font-weight: 700;
+}
+
+/* 渐变文字 */
+.gradient-text {
+  background: var(--gradient);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+
+/* ---------- 通用按钮 ---------- */
+.btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 12px 24px;
+  border-radius: 10px;
+  font-size: 0.95rem;
+  font-weight: 600;
+  border: 1px solid transparent;
+  transition:
+    transform 0.2s ease,
+    box-shadow 0.2s ease,
+    background 0.2s ease,
+    border-color 0.2s ease,
+    color 0.2s ease;
+}
+
+.btn:hover {
+  transform: translateY(-2px);
+}
+
+/* 主按钮：渐变底 + 深色文字 */
+.btn-primary {
+  background: var(--gradient);
+  color: #06121a;
+}
+
+.btn-primary:hover {
+  box-shadow: 0 8px 24px rgba(34, 211, 238, 0.25);
+}
+
+/* 幽灵按钮：透明底 + 描边 */
+.btn-ghost {
+  border-color: var(--border);
+  color: var(--text);
+  background: transparent;
+}
+
+.btn-ghost:hover {
+  border-color: var(--accent);
+  color: var(--accent);
+}
+
+/* ---------- 通用卡片 ---------- */
+.card {
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: 16px;
+  transition:
+    transform 0.25s ease,
+    border-color 0.25s ease,
+    background 0.25s ease;
+}
+
+.card:hover {
+  transform: translateY(-4px);
+  border-color: rgba(34, 211, 238, 0.45);
+  background: var(--card-hover);
+}
+
+/* ---------- 技术标签 chip ---------- */
+.chip {
+  display: inline-block;
+  padding: 3px 12px;
+  border-radius: 999px;
+  border: 1px solid var(--border);
+  background: rgba(34, 211, 238, 0.06);
+  color: var(--text-dim);
+  font-family: var(--font-mono);
+  font-size: 0.78rem;
+  white-space: nowrap;
+}
+
+/* ---------- v-reveal 滚动渐显动画 ---------- */
+/* 初始态：下移 + 透明；进入视口后由指令添加 .is-visible */
+.reveal {
+  opacity: 0;
+  transform: translateY(26px);
+  transition:
+    opacity 0.6s ease,
+    transform 0.6s ease;
+}
+
+.reveal.is-visible {
+  opacity: 1;
+  transform: none;
+}
+
+/* 用户系统开启"减少动态效果"时关闭全部动画（无障碍） */
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+
+  .reveal {
+    opacity: 1;
+    transform: none;
+    transition: none;
+  }
+}
