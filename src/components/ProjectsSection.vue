@@ -1,12 +1,23 @@
 <!--
-  @file 项目展示 —— 行式列表替代等大卡片：每行左题右链，hover 整行点亮
+  @file 项目展示 —— 行式列表：固定「本站」条目 + 运行时从 GitHub 拉取的真实仓库
 -->
 <script setup>
 /**
- * 项目列表组件：数据来自 profile.js 的 projects 数组
- * github / demo 链接为空时不渲染对应入口
+ * 项目列表组件
+ * - pinned：来自 profile.js（当前仅本站条目，手工维护）
+ * - repos：来自 github.js 动态拉取（缓存 → 实时 API → 快照兜底，调用方无需感知降级）
  */
-import { projects } from '../data/profile'
+import { onMounted, ref } from 'vue'
+import { projects as pinned } from '../data/profile'
+import { getGithubData } from '../data/github'
+
+/** 动态仓库列表（拉取完成后渲染） */
+const repos = ref([])
+
+onMounted(async () => {
+  const data = await getGithubData()
+  repos.value = data.repos
+})
 </script>
 
 <template>
@@ -14,11 +25,12 @@ import { projects } from '../data/profile'
     <div class="container">
       <div class="section-head">
         <h2 class="section-title">精选项目</h2>
-        <p class="section-meta">完整列表见 GitHub</p>
+        <p class="section-meta">同步自 GitHub 公开仓库</p>
       </div>
 
       <ul class="project-list">
-        <li v-for="p in projects" :key="p.title" class="project-row">
+        <!-- 手工固定条目（本站） -->
+        <li v-for="p in pinned" :key="p.title" class="project-row">
           <div class="project-main">
             <h3 class="project-title">{{ p.title }}</h3>
             <p class="project-desc">{{ p.description }}</p>
@@ -29,6 +41,22 @@ import { projects } from '../data/profile'
           <div class="project-links">
             <a v-if="p.demo" class="link-u" :href="p.demo" target="_blank" rel="noopener">访问</a>
             <a v-if="p.github" class="link-u" :href="p.github" target="_blank" rel="noopener">源码</a>
+          </div>
+        </li>
+
+        <!-- 动态仓库条目 -->
+        <li v-for="r in repos" :key="r.name" class="project-row">
+          <div class="project-main">
+            <h3 class="project-title">{{ r.name }}</h3>
+            <p v-if="r.description" class="project-desc">{{ r.description }}</p>
+            <p class="project-stack">
+              <span v-if="r.language">{{ r.language }}</span>
+              <span v-if="r.stars > 0">★ {{ r.stars }}</span>
+              <span>{{ r.updatedAt }}</span>
+            </p>
+          </div>
+          <div class="project-links">
+            <a class="link-u" :href="r.url" target="_blank" rel="noopener">源码</a>
           </div>
         </li>
       </ul>
@@ -74,9 +102,14 @@ import { projects } from '../data/profile'
   max-width: 46em;
   color: var(--muted);
   font-size: 0.95rem;
+  /* 长描述（README 式原文）限 3 行，尾部省略 */
+  display: -webkit-box;
+  -webkit-line-clamp: 3;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
 }
 
-/* 技术栈：mono 流式小字（钢蓝），以斜杠分隔，无胶囊 */
+/* 元信息：mono 流式小字（钢蓝），以斜杠分隔，无胶囊 */
 .project-stack {
   margin-top: 14px;
   font-family: var(--font-mono);

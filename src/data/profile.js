@@ -36,9 +36,9 @@ export const aboutText = [
 ]
 
 /**
- * 项目列表（Projects 板块）
+ * 手工固定的项目条目（Projects 板块置顶展示）
+ * 其余仓库由 src/data/github.js 运行时从 GitHub 动态拉取，无需在此维护
  * @type {Array<{title: string, description: string, tech: string[], github?: string, demo?: string}>}
- * TODO: 将示例项目替换为你自己的真实项目
  */
 export const projects = [
   {
@@ -51,32 +51,15 @@ export const projects = [
     /** 在线演示链接（可选，不填则不显示该入口） */
     demo: '',
   },
-  {
-    title: '【示例】后台管理系统',
-    description:
-      '替换成你的真实项目：一句话说清楚它解决了什么问题、你负责的部分，以及亮点数据（性能提升幅度 / 用户量等）。',
-    tech: ['Vue 3', 'Element Plus', 'Node.js'],
-    github: 'https://github.com/xiaoxin8635',
-    demo: '',
-  },
-  {
-    title: '【示例】开源工具库',
-    description:
-      '替换成你的真实项目：没有截图也没关系，清晰的描述与准确的技术栈标签更能体现工程能力。',
-    tech: ['TypeScript', 'Vitest', 'CI/CD'],
-    github: 'https://github.com/xiaoxin8635',
-  },
 ]
 
 /**
- * 技能分组（Skills 板块）
- * TODO: 按你的真实技术栈调整
+ * 手工维护的技能分组（Skills 板块下半部分；上半部分为 GitHub 语言分布自动统计）
+ * TODO: 按真实掌握情况增删条目 —— 保持真实，不要罗列未使用过的技术
  * @type {Array<{name: string, items: string[]}>}
  */
 export const skillGroups = [
-  { name: '前端', items: ['Vue 3', 'React', 'TypeScript', 'Vite', 'Vitest'] },
-  { name: '后端', items: ['Node.js', 'Express', 'RESTful API', 'MySQL', 'Redis'] },
-  { name: '工程与云', items: ['Git', 'GitHub Actions', 'Docker', 'Cloudflare', 'Linux'] },
+  { name: '工程与工具', items: ['Git', 'GitHub Actions', 'Cloudflare Pages', 'Vite'] },
 ]
 
 /**
