@@ -37,7 +37,8 @@ const SNAPSHOT = {
     },
     {
       name: 'ai-long-session-workbench',
-      description: '',
+      description:
+        '面向求职与技术学习的多会话 Agent 系统：自研前端工作台（React + TypeScript + Tailwind）+ 自研长期记忆与上下文组装服务（memory-service），支持跨会话记忆、知识库问答、MCP 工具调用、token 成本控制和 Langfuse 观测。',
       language: 'Python',
       stars: 0,
       url: `https://github.com/xiaoxin8635/ai-long-session-workbench`,
