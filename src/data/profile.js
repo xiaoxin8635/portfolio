@@ -19,8 +19,8 @@ export const profile = {
   tagline: '把想法做成能运行的产品。这个网站的界面由右侧这份配置驱动 —— 改完推送，一两分钟内自动上线。',
   /** 所在地 */
   location: 'China',
-  /** 联系邮箱 —— TODO: 替换为你的真实邮箱 */
-  email: 'hello@example.com',
+  /** 联系邮箱（联系板块展示） */
+  email: 'coderchen003@163.com',
   /** GitHub 主页（导航 / 首屏 / 联系板块的跳转链接） */
   github: 'https://github.com/xiaoxin8635',
 }
@@ -63,23 +63,11 @@ export const skillGroups = [
 ]
 
 /**
- * 个人经历时间线（About 板块，按时间倒序排列）
- * TODO: 替换为你的真实经历
+ * 个人经历时间线（About 板块，按时间倒序排列；为空数组时该板块自动隐藏）
+ * TODO: 需要展示时按此格式添加条目
  * @type {Array<{period: string, title: string, description: string}>}
  */
-export const timeline = [
-  {
-    /** 时间段（年份或区间，如 2023 / 2020-2024） */
-    period: '20XX',
-    title: '【示例】XX 公司 · 前端开发工程师',
-    description: '负责核心业务前端开发，推动组件化改造与页面性能优化。',
-  },
-  {
-    period: '20XX',
-    title: '【示例】XX 大学 · 计算机科学与技术',
-    description: '在校期间系统学习 Web 全栈技术，完成多个实践项目。',
-  },
-]
+export const timeline = []
 
 /** 页脚左侧的备注文案 */
 export const footerNote = '用 Vue 构建 · 托管于 Cloudflare'

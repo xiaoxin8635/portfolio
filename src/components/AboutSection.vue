@@ -13,17 +13,17 @@ import { aboutText, timeline } from '../data/profile'
     <div class="container">
       <div class="section-head">
         <h2 class="section-title">关于我</h2>
-        <p class="section-meta">经历与偏好</p>
+        <p v-if="timeline.length" class="section-meta">经历与偏好</p>
       </div>
 
-      <div class="about-grid">
+      <div class="about-grid" :class="{ single: !timeline.length }">
         <!-- 左：介绍段落 -->
         <div class="intro">
           <p v-for="(para, i) in aboutText" :key="i">{{ para }}</p>
         </div>
 
-        <!-- 右：经历时间线 -->
-        <ol class="timeline">
+        <!-- 右：经历时间线（timeline 为空时整列隐藏） -->
+        <ol v-if="timeline.length" class="timeline">
           <li v-for="(item, i) in timeline" :key="i" class="tl-item">
             <p class="tl-period">{{ item.period }}</p>
             <h4 class="tl-title">{{ item.title }}</h4>
@@ -40,6 +40,15 @@ import { aboutText, timeline } from '../data/profile'
   display: grid;
   grid-template-columns: 1fr 1.1fr;
   gap: 64px;
+}
+
+/* 无时间线时单列，限制介绍文本行长保证可读性 */
+.about-grid.single {
+  grid-template-columns: 1fr;
+}
+
+.about-grid.single .intro {
+  max-width: 46em;
 }
 
 /* 介绍：纯文本排版，无卡片容器 */

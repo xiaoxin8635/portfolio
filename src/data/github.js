@@ -27,15 +27,6 @@ const CACHE_TTL = 60 * 60 * 1000
 const SNAPSHOT = {
   repos: [
     {
-      name: 'Flow-Forge',
-      description:
-        '面向高并发文生图 / 文生视频场景的开源 API 模型网关：Go + Python 双层架构，统一任务式 API，内置鉴权、限流、配额、渠道路由与任务编排。',
-      language: 'Go + Python',
-      stars: 0,
-      url: `https://github.com/xiaoxin8635/Flow-Forge`,
-      updatedAt: '2026-08-23',
-    },
-    {
       name: 'ai-long-session-workbench',
       description:
         '面向求职与技术学习的多会话 Agent 系统：自研前端工作台（React + TypeScript + Tailwind）+ 自研长期记忆与上下文组装服务（memory-service），支持跨会话记忆、知识库问答、MCP 工具调用、token 成本控制和 Langfuse 观测。',
@@ -44,11 +35,24 @@ const SNAPSHOT = {
       url: `https://github.com/xiaoxin8635/ai-long-session-workbench`,
       updatedAt: '2026-09-23',
     },
+    {
+      name: 'Flow-Forge',
+      description:
+        '本项目是一个面向高并发文生图、文生视频、图生视频场景的开源 API 模型网关。系统对外提供统一的任务式 API，对内屏蔽不同模型供应商与本地推理服务的差异，并提供鉴权、限流、配额、渠道路由、任务编排、结果存储和可观测能力。 系统采用 Go + Python 双层架构： - Go Gateway：负责高并发请求入口、鉴权、限流、配额、任务创建、任务查询和渠道路由。 - Python Worker：负责供应商适配、本地推理适配、上游任务轮询、结果下载转存和状态回写。',
+      // GitHub API 主语言为 null(仓库当前无代码文件,仅文档),渲染时不展示语言徽标
+      language: null,
+      stars: 0,
+      url: `https://github.com/xiaoxin8635/Flow-Forge`,
+      updatedAt: '2026-08-23',
+    },
   ],
   langStats: [
-    { name: 'Go', percent: 47 },
-    { name: 'Python', percent: 42 },
-    { name: 'Vue', percent: 11 },
+    { name: 'Python', percent: 70 },
+    { name: 'TypeScript', percent: 23 },
+    { name: 'HTML', percent: 2 },
+    { name: 'Vue', percent: 2 },
+    { name: 'CSS', percent: 2 },
+    { name: 'JavaScript', percent: 1 },
   ],
 }
 
