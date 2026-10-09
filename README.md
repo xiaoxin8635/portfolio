@@ -34,7 +34,8 @@ npm run preview # 本地预览生产构建产物
 │   ├── main.js                   # 应用入口
 │   ├── App.vue                   # 根组件（板块编排）
 │   ├── assets/main.css           # 设计 token 与全局样式（琥珀金深色主题）
-│   ├── data/profile.js           # ★ 网站内容配置（唯一数据源）
+│   ├── data/profile.js           # ★ 网站内容配置（手工数据源）
+│   ├── data/github.js            # GitHub 动态数据（仓库列表 + 语言分布，快照兜底）
 │   └── components/
 │       ├── NavBar.vue            # 固定导航（滚动收纳细条 + 移动端菜单）
 │       ├── HeroSection.vue       # 首屏（左文右 profile.js 代码窗口）
@@ -48,15 +49,26 @@ npm run preview # 本地预览生产构建产物
 
 ## 修改网站内容
 
-**只需编辑 `src/data/profile.js`** —— 姓名、职位、项目、技能、经历、联系方式全部集中在该文件，改完 push 即自动上线：
+**只需编辑 `src/data/profile.js`** —— 姓名、职位、经历、联系方式全部集中在该文件，改完 push 即自动上线：
 
-1. 替换标注 `TODO` 的字段（邮箱、示例项目、经历）
-2. `projects` 数组增删项目条目，每项支持 `github` / `demo` 链接（留空则不显示对应入口）
+1. 替换标注 `TODO` 的字段（邮箱、经历）
+2. `projects` 数组仅用于**手工置顶条目**（如本站）；其余项目自动从 GitHub 同步（见下节）
 3. 提交并推送：
 
 ```bash
 git add . && git commit -m "docs: 更新个人信息" && git push
 ```
+
+## GitHub 动态数据
+
+项目列表与技术栈语言分布**运行时从 GitHub API 自动拉取**（`src/data/github.js`）：
+
+- 你在 GitHub 上新建 / 更新公开仓库后，网站**无需重新部署**即可展示最新内容（访客浏览器实时拉取）
+- 数据策略：localStorage 缓存 1 小时 → 实时请求（超时 6 秒）→ 内嵌真实快照兜底（API 不可用时仍正常展示）
+- 语言分布聚合自各仓库 `languages` 接口的真实字节占比（过滤占比 <1% 的噪音项，最多 6 项）
+- 快照更新方式：仓库内容有大幅变化时，手动更新 `github.js` 中的 `SNAPSHOT` 常量（当前生成于 2026-10-09）
+
+> 注意：未认证 GitHub API 限额为 60 次/小时/IP，访客浏览器各自计数并有一小时缓存，个人站点完全够用。
 
 ## 部署到 Cloudflare
 
