@@ -29,18 +29,20 @@ npm run preview # 本地预览生产构建产物
 ├── index.html                    # HTML 入口（SEO / OG 元信息、theme-color、字体预加载）
 ├── public/
 │   ├── favicon.svg               # 站点图标
-│   └── fonts/                    # 自托管字体（Space Grotesk / JetBrains Mono）
+│   ├── fonts/                    # 自托管字体（Space Grotesk / JetBrains Mono）
+│   └── icons/                    # 自托管技术栈图标（devicon SVG，24 个）
 ├── src/
 │   ├── main.js                   # 应用入口
 │   ├── App.vue                   # 根组件（板块编排）
-│   ├── assets/main.css           # 设计 token 与全局样式（琥珀金深色主题）
+│   ├── assets/main.css           # 设计 token 与全局样式（琥珀金浅色主题）
 │   ├── data/profile.js           # ★ 网站内容配置（手工数据源）
 │   ├── data/github.js            # GitHub 动态数据（仓库列表 + 语言分布，快照兜底）
+│   ├── data/langMeta.js          # 语言元数据（自托管图标路径 + GitHub 官方语言色）
 │   └── components/
 │       ├── NavBar.vue            # 固定导航（滚动收纳细条 + 移动端菜单）
-│       ├── HeroSection.vue       # 首屏（左文右 profile.js 代码窗口）
-│       ├── ProjectsSection.vue   # 项目展示（行式列表）
-│       ├── SkillsSection.vue     # 技术栈（分组清单）
+│       ├── HeroSection.vue       # 首屏（左文右 profile.js 代码窗口，全站唯一深色块）
+│       ├── ProjectsSection.vue   # 项目展示（双列卡片网格 + 技术图标）
+│       ├── SkillsSection.vue     # 技术栈（语言分布官方色条 + 分组清单）
 │       ├── AboutSection.vue      # 关于我 + 时间线
 │       ├── ContactSection.vue    # 联系方式（大字邮箱）
 │       └── FooterBar.vue         # 页脚

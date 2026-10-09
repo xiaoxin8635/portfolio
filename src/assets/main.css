@@ -1,7 +1,7 @@
 /**
  * @file 全局样式与设计变量（Design Tokens）
- * 主题「代码即展品」：近黑微暖底 + 琥珀金强调 + 冷钢蓝次级
- * 原则：无渐变装饰、无 eyebrow 标签、无卡片堆叠；排版与留白本身承担设计
+ * 主题「浅色工作室」：暖白纸感底 + 深琥珀金强调 + 深钢蓝次级
+ * 原则：无渐变装饰、无 eyebrow 标签；排版与留白本身承担设计，装饰仅限细线与小图标
  */
 
 /* ---------- 自托管字体（中国网络友好，不依赖 Google Fonts） ---------- */
@@ -28,21 +28,21 @@
 }
 
 :root {
-  /* 背景层级：近黑微暖，非纯黑 */
-  --bg: #0d0e12;
-  --surface: #15171d;
-  --surface-2: #1b1e26;
+  /* 背景层级：暖白纸感，非冷纯白 */
+  --bg: #fafaf8;
+  --surface: #ffffff;
+  --surface-2: #f2f1ec;
   /* 边界：实色细线，弱化装饰感 */
-  --border: #262a33;
-  --border-strong: #3a3f4b;
-  /* 文字层级：暖白与暖灰 */
-  --text: #e8e6e1;
-  --muted: #9a978f;
-  --faint: #6b6862;
-  /* 强调色：琥珀金仅用于链接 / 焦点 / 当前态；冷钢蓝用于日期、标签等次级信息 */
-  --accent: #e2b04a;
-  --accent-dim: rgba(226, 176, 74, 0.13);
-  --steel: #7d93b2;
+  --border: #e6e4dd;
+  --border-strong: #c9c6bc;
+  /* 文字层级：近黑与暖灰 */
+  --text: #1d1e22;
+  --muted: #6e6c64;
+  --faint: #9b988f;
+  /* 强调色：深琥珀金仅用于链接 / 焦点 / 当前态；深钢蓝用于日期、标签等次级信息（均已加深保证白底对比度） */
+  --accent: #a97a10;
+  --accent-dim: rgba(169, 122, 16, 0.1);
+  --steel: #56749b;
   /* 字体：英文展示 Space Grotesk / 数据 JetBrains Mono / 中文走系统黑体栈 */
   --font-display: 'Space Grotesk', 'PingFang SC', 'HarmonyOS Sans SC', 'Microsoft YaHei', sans-serif;
   --font-sans: 'PingFang SC', 'HarmonyOS Sans SC', 'Microsoft YaHei', system-ui, sans-serif;
@@ -71,7 +71,7 @@ body {
 }
 
 ::selection {
-  background: rgba(226, 176, 74, 0.28);
+  background: rgba(169, 122, 16, 0.22);
 }
 
 /* 键盘焦点可见性（无障碍质量线） */
@@ -81,7 +81,7 @@ body {
   border-radius: 2px;
 }
 
-/* 深色滚动条 */
+/* 浅色滚动条 */
 ::-webkit-scrollbar {
   width: 10px;
 }
@@ -89,11 +89,11 @@ body {
   background: var(--bg);
 }
 ::-webkit-scrollbar-thumb {
-  background: #2e323c;
+  background: #d8d5cc;
   border-radius: 5px;
 }
 ::-webkit-scrollbar-thumb:hover {
-  background: #3a3f4b;
+  background: #c9c6bc;
 }
 
 a {
@@ -174,15 +174,15 @@ button {
   transition: background 0.2s ease, border-color 0.2s ease, color 0.2s ease;
 }
 
-/* 主按钮：暖白实底 + 深色字（ hover 换金色，不做渐变与位移） */
+/* 主按钮：近黑实底 + 暖白字（ hover 换金色，不做渐变与位移） */
 .btn-primary {
   background: var(--text);
-  color: #14151a;
+  color: #fafaf8;
 }
 
 .btn-primary:hover {
   background: var(--accent);
-  color: #191307;
+  color: #fffdf7;
 }
 
 /* 幽灵按钮：细描边 */

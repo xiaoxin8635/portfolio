@@ -1,15 +1,17 @@
 <!--
-  @file 技术栈 —— 上半：GitHub 仓库真实语言分布统计；下半：手工维护的工程技能分组
+  @file 技术栈 —— 上半：GitHub 仓库真实语言分布统计（官方语言色 + 自托管图标）；下半：手工维护的工程技能分组
 -->
 <script setup>
 /**
  * 技能板块
  * - langStats：由 github.js 聚合各仓库 languages 接口得到（真实字节占比，缓存 → 实时 → 快照兜底）
  * - skillGroups：来自 profile.js，手工维护（保持真实，勿填未掌握项）
+ * - 语言图标与颜色来自 langMeta.js（GitHub Linguist 官方语言色）
  */
 import { onMounted, ref } from 'vue'
 import { skillGroups } from '../data/profile'
 import { getGithubData } from '../data/github'
+import { langIcon, langColor } from '../data/langMeta'
 
 /** 语言分布统计（名称 + 字节占比） */
 const langStats = ref([])
@@ -28,12 +30,15 @@ onMounted(async () => {
         <p class="section-meta">语言分布统计自 GitHub 公开仓库</p>
       </div>
 
-      <!-- 语言分布：细条形统计 -->
+      <!-- 语言分布：细条形统计（各语言使用 GitHub 官方色） -->
       <div class="lang-chart">
         <div v-for="l in langStats" :key="l.name" class="lang-row">
-          <span class="lang-name">{{ l.name }}</span>
+          <span class="lang-name">
+            <img v-if="langIcon(l.name)" class="lang-icon" :src="langIcon(l.name)" alt="" aria-hidden="true" />
+            {{ l.name }}
+          </span>
           <span class="lang-bar" aria-hidden="true">
-            <i class="lang-fill" :style="{ width: l.percent + '%' }" />
+            <i class="lang-fill" :style="{ width: l.percent + '%', background: langColor(l.name) }" />
           </span>
           <span class="lang-percent">{{ l.percent }}%</span>
         </div>
@@ -63,18 +68,28 @@ onMounted(async () => {
 
 .lang-row {
   display: grid;
-  grid-template-columns: 92px 1fr 48px;
+  grid-template-columns: 132px 1fr 48px;
   align-items: center;
   gap: 16px;
 }
 
+/* 名称列：小图标 + mono 语言名（图标与项目卡片同源） */
 .lang-name {
+  display: inline-flex;
+  align-items: center;
+  gap: 9px;
   font-family: var(--font-mono);
   font-size: 0.85rem;
   color: var(--text);
 }
 
-/* 细条：4px 高，弱底色 + 钢蓝填充（无渐变） */
+.lang-icon {
+  width: 17px;
+  height: 17px;
+  flex: none;
+}
+
+/* 细条：4px 高，弱底色 + 语言官方色填充（无渐变） */
 .lang-bar {
   height: 4px;
   background: var(--border);
@@ -85,7 +100,6 @@ onMounted(async () => {
 .lang-fill {
   display: block;
   height: 100%;
-  background: var(--steel);
   transition: width 0.6s cubic-bezier(0.22, 1, 0.36, 1);
 }
 

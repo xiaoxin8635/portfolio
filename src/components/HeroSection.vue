@@ -112,13 +112,22 @@ import { profile } from '../data/profile'
 }
 
 /* ---------- 代码窗口 ---------- */
+/* 全站唯一深色块：白底页面上的视觉锚点，内部用局部变量固定深色主题，不随全局翻色 */
 .window {
-  background: var(--surface);
-  border: 1px solid var(--border);
+  --win-bg: #15171d;
+  --win-bg-2: #1b1e26;
+  --win-border: #262a33;
+  --win-text: #e8e6e1;
+  --win-faint: #6b6862;
+  --win-accent: #e2b04a;
+  --win-steel: #7d93b2;
+  background: var(--win-bg);
+  border: 1px solid var(--win-border);
   border-radius: 10px;
   overflow: hidden;
   font-family: var(--font-mono);
-  box-shadow: 0 24px 60px rgba(0, 0, 0, 0.4);
+  /* 白底页面投影：双层低透明度，比深色底时更收敛 */
+  box-shadow: 0 1px 2px rgba(29, 30, 34, 0.08), 0 20px 48px rgba(29, 30, 34, 0.18);
 }
 
 .window-bar {
@@ -126,8 +135,8 @@ import { profile } from '../data/profile'
   align-items: center;
   gap: 12px;
   padding: 11px 16px;
-  border-bottom: 1px solid var(--border);
-  background: var(--surface-2);
+  border-bottom: 1px solid var(--win-border);
+  background: var(--win-bg-2);
 }
 
 .window-dots {
@@ -145,7 +154,7 @@ import { profile } from '../data/profile'
 /* 文件路径用弱化暖灰，不抢代码内容 */
 .window-file {
   font-size: 0.78rem;
-  color: var(--faint);
+  color: var(--win-faint);
 }
 
 .window-code {
@@ -155,18 +164,18 @@ import { profile } from '../data/profile'
   overflow-x: auto;
 }
 
-/* 语法高亮：金=关键字、钢蓝=字符串、暖灰=注释（与全站 token 同源） */
+/* 语法高亮：金=关键字、钢蓝=字符串、暖灰=注释（固定深色主题配色，与窗口同源） */
 .tok-kw {
-  color: var(--accent);
+  color: var(--win-accent);
 }
 .tok-var {
-  color: var(--text);
+  color: var(--win-text);
 }
 .tok-str {
-  color: var(--steel);
+  color: var(--win-steel);
 }
 .tok-cmt {
-  color: var(--faint);
+  color: var(--win-faint);
 }
 
 /* 底部状态栏：语义性实时信息 */
@@ -175,9 +184,9 @@ import { profile } from '../data/profile'
   justify-content: space-between;
   gap: 12px;
   padding: 9px 16px;
-  border-top: 1px solid var(--border);
+  border-top: 1px solid var(--win-border);
   font-size: 0.74rem;
-  color: var(--faint);
+  color: var(--win-faint);
 }
 
 /* ---------- 响应式 ---------- */
