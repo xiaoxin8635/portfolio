@@ -17,7 +17,7 @@ const year = new Date().getFullYear()
       <p class="copy">© {{ year }} {{ profile.name }} · {{ footerNote }}</p>
       <p class="powered">
         Deployed on
-        <a href="https://pages.cloudflare.com" target="_blank" rel="noopener">Cloudflare Pages</a>
+        <a href="https://workers.cloudflare.com" target="_blank" rel="noopener">Cloudflare</a>
       </p>
     </div>
   </footer>

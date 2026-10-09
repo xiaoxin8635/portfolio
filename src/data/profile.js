@@ -34,7 +34,7 @@ export const profile = {
  */
 export const aboutText = [
   '你好，我是陈琦勇，一名全栈开发者。专注于 Web 应用的设计与实现，从界面交互到服务端接口都有实践经验。',
-  '我喜欢简洁可维护的代码和顺手的工程化流程 —— 这个网站本身就是一次实践：代码托管在 GitHub，由 Cloudflare Pages 在每次 push 后自动构建并部署到全球 CDN。',
+  '我喜欢简洁可维护的代码和顺手的工程化流程 —— 这个网站本身就是一次实践：代码托管在 GitHub，由 Cloudflare 在每次 push 后自动构建并部署到全球 CDN。',
 ]
 
 /**
@@ -48,8 +48,8 @@ export const projects = [
     index: '01',
     title: '个人作品集网站（本站）',
     description:
-      '基于 Vue 3 + Vite 构建的响应式单页作品集，托管于 Cloudflare Pages。git push 后 1~2 分钟内自动构建上线，全球 CDN 加速。',
-    tech: ['Vue 3', 'Vite', 'Cloudflare Pages'],
+      '基于 Vue 3 + Vite 构建的响应式单页作品集，托管于 Cloudflare。git push 后 1~2 分钟内自动构建上线，全球 CDN 加速。',
+    tech: ['Vue 3', 'Vite', 'Cloudflare'],
     /** GitHub 仓库链接（不填则不显示该入口） */
     github: 'https://github.com/xiaoxin8635/portfolio',
     /** 在线演示链接（可选，不填则不显示该入口） */
@@ -105,4 +105,4 @@ export const timeline = [
 ]
 
 /** 页脚左侧的备注文案 */
-export const footerNote = '用 Vue 构建 · 托管于 Cloudflare Pages'
+export const footerNote = '用 Vue 构建 · 托管于 Cloudflare'
